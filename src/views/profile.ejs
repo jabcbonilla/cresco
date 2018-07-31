@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <title>Profile Page</title>
+    <% include partials/head %>
+  </head>
+  <body>
+    <div class="container">
+      <header class="text-center">
+        <h1>Profile Page</h1>
+        <a href="/logout" class="btn btn-light btn-sm">
+          Logout
+        </a>
+      </header>
+      <hr>
+      <div class="container">
+        <div class="col-bg-12">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title"><span class="fa fa-user"></span> Local</h3>
+              <p>
+                <strong>id</strong> : <%= user._id %> <br>
+                <strong>email</strong> : <%= user.local.email %> <br>
+                <strong>password</strong> : <%= user.local.password %>
+              </p>
+              <a href="/logout" class="btn btn-light btn-sm">
+                Logout
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- ENCUESTAS -->
+
+
+<!-- FIN ENCUESTAS -->
+
+
+<div class="container">
+  <div class="row">
+    <!--Formulario-->
+    <div class="col-md-5">
+      <div class="card">
+        <div class="card-body">
+          <form action="/agregar" method="POST">
+            <div class="form-group">
+              <input type="text" name="valor" placeholder="Escriba la pregunta" class="form-control">
+
+              <form action="" >
+                <h5 class="text-center">Tipo de pregunta</h5>
+                <input type="radio" name="surveyType" value="simple"> Selección simple<br>
+                <input type="radio" name="surveyType" value="multiple"> Selección múltiple<br>
+                <input type="radio" name="surveyType" value="dicotomica"> Dicotómica (Sí o no)<br>
+              </form>
+
+              
+               
+                <div class="row">
+                  <h5 class="col-md-7">¿Cuántas opciones tiene la pregunta?</h5>
+                  <div class="col-md-5">
+                            <input  type="number" value="1" name="quantity" min="1" max="6">
+                  </div>
+                </div>
+             
+
+
+            </div>
+            
+            <button class="btn btn-primary btn-block" type="submit">Añadir</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  
+
+
+<!--Lista-->
+  <div class="col-md-7">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Valor</th>    
+          <th>Opciones</th>   
+          
+        </tr>
+      </thead>
+      <tbody>
+        <% for(var i = 0; i < tasks.length; i++){ %>
+          <tr>
+            
+            <td><%= tasks[i].valor %></td>
+            <td>
+              <a href="/listo/<%= tasks[i]._id %>" class="btn <%= tasks[i].estatus ? 'btn-success' : 'btn-dark' %>">Listo</a>
+              <a href="/eliminar/<%= tasks[i]._id %>" class="btn btn-danger">Eliminar</a>
+              <a href="/editar/<%= tasks[i]._id %>" class="btn btn-info">Editar</a>
+            </td>
+          </tr>
+        <% } %>
+      </tbody>
+        
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<div class="chart-container" style="position: relative; height:40vh; width:80vw">
+    <canvas id="myChart" ></canvas>
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"],
+        datasets: [{
+            label: ['Personas que respondieron positivamente'],
+          
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [<%=tasks[0].valor %>, 10, 5, 2, 20, 30, 45],
+            
+        },
+        {
+            label: ['Personas que no respondieron'],
+          
+            backgroundColor: 'rgb(255, 19, 12)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [<%= tasks[1].valor  %>, 10, 5, 2, 20, 30, 45],
+        }
+        ]
+    },
+
+    // Configuration options go here
+
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+</div>
+  </body>
+</html>
