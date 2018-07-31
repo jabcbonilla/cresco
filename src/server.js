@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-
+const http = require('http')
 const path = require('path');
 const mongoose = require('mongoose');
 const passport = require('passport');
@@ -9,9 +9,14 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const cors = require('cors')
+
+//fuego cruzado para permitir access control total desde cualquier servidor
+app.use(cors());
+app.options('*', cors());
 
 //const { url } = require('./config/database.js');
-const { grafico } = require('./config/database.js');
+const { grafico,port } = require('./config/database.js');
 
 
 
@@ -22,7 +27,7 @@ mongoose.connect(grafico, {
 require('./config/passport')(passport);
 
 // settings
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || port);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -47,6 +52,7 @@ require('./app/routes.js')(app, passport);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // start the server
-app.listen(app.get('port'), () => {
-	console.log('server on port ', app.get('port'));
-});
+
+var server = http.createServer(app).listen(port, function() {  
+    console.log('server listening on port https://localhost:'+ port);
+  });

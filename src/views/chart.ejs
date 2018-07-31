@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="../tools/jquery-1.12.0.min.js"></script>
+	<script type="text/javascript" src="../tools/chartjs/Chart.bundle.min.js"></script> 
+	<!--
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>-->
+	
+    <title>Grafica</title>
+    <nav>
+        
+            <a href="/">Principal</a>
+            <a class="left" href="login.html">iniciar sesion</a>
+            <a class="left" href="registrar.html">registro</a>
+        
+    </nav>
+</head>
+<body>
+    <form id="radios">
+        <input type="radio" name="tipo" id="barras" value="bar" onclick="cargargrafico(this.value)"> barras
+        <input type="radio" name="tipo" id="torta" value="pie" onclick="cargargrafico(this.value)"> torta
+        <input type="radio" name="tipo" id="linea" value="line" onclick="cargargrafico(this.value)"> linea
+        <input type="radio" name="tipo" id="areapolar" value="polarArea" onclick="cargargrafico(this.value)"> Area Polar
+        <input type="radio" name="tipo" id="radar" value="radar" onclick="cargargrafico(this.value)"> Radar
+        <input type="radio" name="tipo" id="dona" value="doughnut" onclick="cargargrafico(this.value)"> dona
+        <input type="radio" name="tipo" id="burbuja" value="bubble" onclick="cargargrafico(this.value)"> Burbujas
+   <input type="radio" name="tipo" id="scatter" value="scatter" onclick="cargargrafico(this.value)"> scatter
+    </form>
+    
+    <canvas id="myChart" style="max-width: 500px;"></canvas>
+    <input type="button" class="btn" id="add" value="agregar dato">
+    <input type="button" id="quit" value="remover dato">
+    <input type="button" id="addcol" value="agregar columna">
+    <input type="button" id="quitcol" value="remover columna">
+    <input type="button" id="new"value="nuevos datos">
+<script>
+
+        var ctx = document.getElementById("myChart").getContext('2d');
+
+    
+    
+    function cargargrafico(tipo){
+    var datos = {'categories': ['enero','febrero','marzo','abril','mayo'],
+            'dataset':[{'label':'petroleo','seriesname':'precio petroleo','data':[1,40,25,30,10],'backgroundColor':'blue'},
+                        {'label':'diesel','seriesname':'precio diesel','data':[10,30,40,5,34],'backgroundColor':'red'}
+                        ]}
+                        
+    
+    myChart = new Chart(ctx, {
+    type: tipo,
+    data: {
+        labels: datos['categories'],
+        datasets: datos['dataset']
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+}
+
+function getgrafica(){
+  
+    fetch("http://localhost:8080/api/fuel")
+.then(res => res.json())
+.then((out) => {
+  console.log('Checkout this JSON! ', out);
+   docs=out; })
+.catch(err => { throw err });
+    
+    console.log(docs)
+    var monthArray = [];
+     var petrolPrices = [];
+     var dieselPrices = [];
+
+
+            for ( var i=0; i< docs.length;i++){
+                var doc = docs[i];
+                  //category array
+                var month = doc['month'];
+                  //series 1 values array
+                var petrol = doc['petrol'];
+                      //series 2 values array
+                var diesel = doc['diesel'];
+                      
+                  monthArray.push({"label": month});
+                  petrolPrices.push({"value" : petrol});
+                  dieselPrices.push({"value" : diesel});
+
+                  var dataset = [
+                        {
+                          "seriesname" : "Petrol Price",
+                          "data" : petrolPrices
+                        },
+                        {
+                          "seriesname" : "Diesel Price",
+                          "data": dieselPrices
+                        }
+                      ];
+              
+                      var response = {
+                        "dataset" : dataset,
+                        "categories" : monthArray
+                      };
+                      console.log(response)
+                    return response;
+                    }
+        }
+
+
+</script>
+
+</body>
+</html>

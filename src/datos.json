@@ -1,0 +1,10 @@
+{ "_id" : ObjectId("5b5a5d8256a6131f2acbdcd4"), "month" : "Jan", "petrol" : 64.72, "diesel" : 52.49 }
+{ "_id" : ObjectId("5b5a5d8356a6131f2acbdcd5"), "month" : "Feb", "petrol" : 62.81, "diesel" : 50.72 }
+{ "_id" : ObjectId("5b5a5d8356a6131f2acbdcd6"), "month" : "Mar", "petrol" : 66.18, "diesel" : 54.06 }
+{ "_id" : ObjectId("5b5a5d8356a6131f2acbdcd7"), "month" : "Apr", "petrol" : 65.17, "diesel" : 51.74 }
+{ "_id" : ObjectId("5b5a5d8356a6131f2acbdcd8"), "month" : "May", "petrol" : 72.94, "diesel" : 57.23 }
+{ "_id" : ObjectId("5b5a5d8356a6131f2acbdcd9"), "month" : "Jun", "petrol" : 73.77, "diesel" : 55.83 }
+{ "_id" : ObjectId("5b5a5d8356a6131f2acbdcda"), "month" : "Jul", "petrol" : 70.7, "diesel" : 52.59 }
+{ "_id" : ObjectId("5b5a5d8356a6131f2acbdcdb"), "month" : "Aug", "petrol" : 66.72, "diesel" : 47.54 }
+{ "_id" : ObjectId("5b5a5d8356a6131f2acbdcdc"), "month" : "Sept", "petrol" : 64.61, "diesel" : 47.02 }
+{ "_id" : ObjectId("5b5a65d08ff8f44a9bfb0ef2"), "month" : "Jan", "petrol" : 50, "diesel" : 43, "__v" : 0 }

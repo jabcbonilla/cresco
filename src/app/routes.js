@@ -1,4 +1,5 @@
 const Task = require('./models/task');
+const Cfuel = require('./controladores/Cfuel')
 
 module.exports = (app, passport) => {
 
@@ -61,6 +62,26 @@ app.post('/agregar', async (req, res) => {
 		tasks
 	});
 });
+
+
+	app.get('/ejemplo',(req,res) =>{
+    res.render('ejemplo1')
+  })
+  	app.get('/otro', (req,res)=>{
+    res.render('ejemplo2')
+  })
+  
+  	app.get('/grafica', (req,res)=>{
+    res.render('chart')
+  })
+
+  	app.get('/graficadb', (req,res)=>{
+    res.render('chartdb')
+  })
+
+  //fuel methods
+	app.get("/fuel",Cfuel.getfuel)
+
 };
 
 function isLoggedIn (req, res, next) {
