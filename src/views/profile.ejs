@@ -13,28 +13,20 @@
 
 <body>
 
+  <nav class="navbar mb-4" id="barra">
+    <a class="navbar-brand marca" href="/profile">CRESCO</a>
+    <form class="form-inline">
 
-  
-
-    <nav class="navbar" id="barra">
-      <a class="navbar-brand marca" href="/profile">CRESCO</a>
-      <form class="form-inline">
-
-        <a href="/profile" class="emailBarra">
-          <%= user.local.email %>
-            <br>
-        </a>
-        <a href="/logout" class="btn btn-light btn-sm btn-logout">
-          Cerrar Sesión
-        </a>
-
-      </form>
-      
-
-    </nav>
-
-
-  <hr>
+      <a href="/profile" class="emailBarra">
+        <%= user.local.email %>
+          <br>
+      </a>
+      <a href="/logout" class="btn btn-light btn-sm btn-logout">
+      <span class="fa fa-sign-out"></span>
+        Cerrar Sesión
+      </a>
+    </form>
+  </nav>
 
   <!-- ENCUESTAS -->
 
@@ -44,23 +36,23 @@
       <div class="col-md-5">
         <div class="card">
           <div class="card-body">
-            <form>
+            <form action="/agregar" method="POST">
               <div class="form-group">
 
                 <h2 class="col-md-12 text-center mb-4">Almacenar nueva encuesta</h2>
-                <input type="text" name="valor" placeholder="Escriba la sucursal" class="form-control mb-4">
-                <input type="text" name="valor" placeholder="Escriba la pregunta" class="form-control mb-4">
+                <input type="text" name="sucursal" placeholder="Escriba la sucursal" class="form-control mb-4">
+                <input type="text" name="pregunta" placeholder="Escriba la pregunta" class="form-control mb-4">
 
                 <h3 class="col-md-12 mb-3">Tipo de pregunta</h3>
                 <div class="container text-center">
                   <div class="btn-group mb-4" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-primary">Selección simple</button>
-                    <button type="button" class="btn btn-info">Selección múltiple</button>
+                    <input type="button" id="btn-Tipo1" class="btn btn-primary" name="tipo"  value="Selección Simple" >
+                   <input type="button" id="btn-Tipo2" class="btn btn-info" name="tipo" value="Selección Múltiple" >
 
                   </div>
                 </div>
 
-  <!-- FIN ENCUESTAS -->
+                <!-- FIN ENCUESTAS -->
 
                 <!-- <div id="main">
 <input type="button" id="btAdd" value="Añadir Elemento" class="bt" />
@@ -69,26 +61,28 @@
 </div>-->
 
                 <div class="container">
-                  <div class="row">
+                  <div class="row mb-3">
 
                     <h3 class="col-md-12 mb-3">Opciones</h3>
-                    <input type="text" name="valor" placeholder="Escriba la opción" class="form-control col-md-7">
-                    <input type="number" name="quantity" data-toggle="tooltip" data-placement="top" title="Especifique la cantidad de usuarios que elijieron esta opción" min="1" max="5" value="1" class="form-control col-md-3" style="left: 5px;">
+                    <input type="text" name="opc1" placeholder="Escriba la opción" class="form-control col-md-7">
+                    <input type="number" name="cant1" data-toggle="tooltip" data-placement="top" title="Especifique la cantidad de usuarios que elijieron esta opción"
+                      min="1" max="5" value="1" class="form-control col-md-3" style="left: 5px;">
                     <div id="main" class="col-md-2">
-                      <button class="btn btn-success" id="btAdd" data-toggle="tooltip" data-placement="right" title="Añadir otra opción">+</button>
+                      <button class="btn btn-success " type="button" id="btAdd" data-toggle="tooltip" data-placement="right" title="Añadir otra opción">+</button>
                     </div>
 
                   </div>
                 </div>
+                <div class="row">
+                <button class="btn btn-success  col-md-6" type="button">Añadir pregunta</button>
+                <button class="btn btn-warning btn-block col-md-6" type="submit">Guardar encuesta -></button>
               </div>
-
+              </div>
             </form>
-            <button action="/agregar" method="POST" class="btn btn-warning btn-block" type="submit">Guardar encuesta</button>
+
           </div>
         </div>
       </div>
-
-
 
       <!--Lista-->
       <div class="col-md-7">
@@ -99,20 +93,25 @@
               <th>Pregunta</th>
               <th>Tipo</th>
               <th>Opciones</th>
-
             </tr>
           </thead>
+
           <tbody>
             <% for(var i = 0; i < tasks.length; i++){ %>
               <tr>
 
                 <td>
-                  <%= tasks[i].pregunta %> <br>
-                 <strong>Opciones:</strong> <br>
-                  <%= tasks[i].opc1 %> <br>
-                  <%= tasks[i].opc2 %> <br>
-                  <%= tasks[i].opc3 %> <br>
-                  <%= tasks[i].opc4 %>
+                  <%= tasks[i].pregunta %>
+                    <br>
+                    <strong>Opciones:</strong>
+                    <br>
+                    <%= tasks[i].opc1 %>
+                      <br>
+                      <%= tasks[i].opc2 %>
+                        <br>
+                        <%= tasks[i].opc3 %>
+                          <br>
+                          <%= tasks[i].opc4 %>
                 </td>
                 <td>
                   <%= tasks[i].tipo %>
@@ -131,7 +130,6 @@
                     <br>
                   </div>
                   <a href="/eliminar/<%= tasks[i]._id %>" class="btn btn-danger">Eliminar</a>
-
                 </td>
               </tr>
               <% } %>
@@ -156,11 +154,15 @@
         alert(index);
         myChart = Chart;
         var chart = new Chart(ctx, {
-          // The type of chart we want to create
+          // Tipo de chart
           type: tipo,
 
+<<<<<<< HEAD
           // The data for our dataset
           
+=======
+          // Datos del chart
+>>>>>>> 5ad9230cc9279123bd00f6ace51a90af8e07094f
           data: {
             labels: ['<%= tasks[0].opc1 %>', '<%= tasks[0].opc2 %>', '<%= tasks[0].opc3 %>', '<%= tasks[0].opc4 %>'],
             datasets: [{
@@ -174,7 +176,7 @@
             ]
           },
 
-          // Configuration options go here
+          // Opciones de configuración
 
           options: {
             scales: {
@@ -186,7 +188,19 @@
             }
           }
         });
-      }
+      };
+
+      function cambiarboton1(){
+    var i=document.getElementById("btn-Tipo1").value = "1";
+
+};
+
+function cambiarboton2(){
+    var i=document.getElementById("btn-Tipo2").value = "2";
+
+}
+
+      
     </script>
   </div>
 </body>
