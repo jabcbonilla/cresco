@@ -118,15 +118,16 @@
                   <%= tasks[i].tipo %>
                 </td>
                 <td>
+            
                   <div class="container">
 
-                    <input type="radio" name="graficType" value="bar" onclick="func(this.value)"> Barra
+                    <input type="radio" name="graficType" value="bar" onclick="cargargrafico(this.value,<%=i%>)"> Barra
                     <br>
-                    <input type="radio" name="graficType" value="polarArea" onclick="func(this.value)"> Área polar
+                    <input type="radio" name="graficType" value="polarArea" onclick="cargargrafico(this.value,<%=i%>)"> Área polar
                     <br>
-                    <input type="radio" name="graficType" value="doughnut" onclick="func(this.value)"> Dona
+                    <input type="radio" name="graficType" value="doughnut" onclick="cargargrafico(this.value,<%=i%>)"> Dona
                     <br>
-                    <input type="radio" name="graficType" value="pie" onclick="func(this.value)"> Torta
+                    <input type="radio" name="graficType" value="pie" onclick="cargargrafico(this.value,<%=i%>)"> Torta
                     <br>
                   </div>
                   <a href="/eliminar/<%= tasks[i]._id %>" class="btn btn-danger">Eliminar</a>
@@ -147,29 +148,26 @@
   <div class="chart-container" style="position: relative; left: 25%; height:20vh; width:50vw">
     <canvas id="myChart"></canvas>
     <script>
+      
       var ctx = document.getElementById('myChart').getContext('2d');
       var myChart;
-
-      function func(tipo) {
-
-        cargargrafico(tipo);
-      };
-
-      function cargargrafico(tipo) {
+      
+      function cargargrafico(tipo,index) {
+        alert(index);
         myChart = Chart;
         var chart = new Chart(ctx, {
           // The type of chart we want to create
           type: tipo,
 
           // The data for our dataset
+          
           data: {
             labels: ['<%= tasks[0].opc1 %>', '<%= tasks[0].opc2 %>', '<%= tasks[0].opc3 %>', '<%= tasks[0].opc4 %>'],
             datasets: [{
               label: ['<%= tasks[0].pregunta %>'],
-
               backgroundColor: ['rgb(0, 255, 39)', 'rgb(243, 255, 0)', 'rgb(255, 87, 51)', 'rgb(255, 0, 0)'],
               borderColor: 'rgb(255, 255, 255)',
-              data: [<%=tasks[0].cant1 %>, <%=tasks[0].cant2 %>, <%=tasks[0].cant3 %>, <%=tasks[0].cant4 %>],
+              data: [<%=tasks[0].cant1%>, <%=tasks[0].cant2 %>, <%=tasks[0].cant3 %>, <%=tasks[0].cant4 %>],
 
             },
 
