@@ -7,8 +7,17 @@ const TaskSchema = new Schema({
 	tipo: Number,
 	opc1: String,
 	opc: String,
+	opc2: String,
+	opc3: String,
+	opc4: String,
+	opc5: String,
+	opc6: String,
 	cant1: Number,
-	cant4: Number
+	cant2: Number,
+	cant3: Number,
+	cant4: Number,
+	cant5: Number,
+	cant6: Number
 	
 });
 
