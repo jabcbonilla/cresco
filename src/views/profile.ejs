@@ -7,7 +7,7 @@
 
 
   <script type="text/javascript" src="./campos.js"></script>
-  <title>Profile Page</title>
+  <title>Principal</title>
   <% include partials/head %>
 </head>
 
@@ -15,24 +15,24 @@
 
 
   <div class="container">
-    <header class="text-center">
-      <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="/profile">CRESCO</a>
-        <form class="form-inline">
 
-          <a href="/profile">
-            <%= user.local.email %>
-              <br>
-          </a>
-          <a href="/logout" class="btn btn-light btn-sm ">
-            Cerrar Sesión
-          </a>
+    <nav class="navbar" id="barra">
+      <a class="navbar-brand " href="/profile">CRESCO</a>
+      <form class="form-inline">
 
-        </form>
-        </ul>
+        <a href="/profile">
+          <%= user.local.email %>
+            <br>
+        </a>
+        <a href="/logout" class="btn btn-light btn-sm ">
+          Cerrar Sesión
+        </a>
 
-      </nav>
-    </header>
+      </form>
+      
+
+    </nav>
+
   </div>
   <hr>
 
@@ -47,13 +47,13 @@
             <form>
               <div class="form-group">
 
-                <h2 class="col-md-12 text-center">Almacenar nueva encuesta</h2>
-                <input type="text" name="valor" placeholder="Escriba la pregunta" class="form-control">
+                <h2 class="col-md-12 text-center mb-4">Almacenar nueva encuesta</h2>
+                <input type="text" name="valor" placeholder="Escriba la sucursal" class="form-control mb-4">
+                <input type="text" name="valor" placeholder="Escriba la pregunta" class="form-control mb-4">
 
-
-                <h5 class="col-md-12 text-center">Tipo de pregunta</h5>
+                <h3 class="col-md-12 mb-3">Tipo de pregunta</h3>
                 <div class="container text-center">
-                  <div class="btn-group" role="group" aria-label="Basic example">
+                  <div class="btn-group mb-4" role="group" aria-label="Basic example">
                     <button type="button" class="btn btn-primary">Selección simple</button>
                     <button type="button" class="btn btn-info">Selección múltiple</button>
 
@@ -71,12 +71,11 @@
                 <div class="container">
                   <div class="row">
 
-                    <h4 class="col-md-12 text-center">Opciones</h4>
+                    <h3 class="col-md-12 mb-3">Opciones</h3>
                     <input type="text" name="valor" placeholder="Escriba la opción" class="form-control col-md-7">
                     <input type="number" name="quantity" min="1" max="5" value="1" class="form-control col-md-3" style="left: 5px;">
                     <div id="main" class="col-md-2">
-                      <button class="btn btn-success" id="btAdd" data-toggle="tooltip" data-placement="right" title="Añadir otra opción"
-                        >+</button>
+                      <button class="btn btn-success" id="btAdd" data-toggle="tooltip" data-placement="right" title="Añadir otra opción">+</button>
                     </div>
 
                   </div>
@@ -84,7 +83,7 @@
               </div>
 
             </form>
-            <button action="/agregar" method="POST" class="btn btn-primary btn-block" type="submit">Añadir</button>
+            <button action="/agregar" method="POST" class="btn btn-warning btn-block" type="submit">Guardar encuesta</button>
           </div>
         </div>
       </div>
@@ -93,7 +92,7 @@
 
       <!--Lista-->
       <div class="col-md-7">
-
+        <h2 class="text-center">Mis encuestas</h2>
         <table class="table table-bordered table-hover">
           <thead>
             <tr>
@@ -135,17 +134,7 @@
         </table>
       </div>
 
-      <div class="container">
 
-        <input type="radio" name="graficType" value="bar" onclick="func(this.value)"> Barra
-        <br>
-        <input type="radio" name="graficType" value="polarArea" onclick="func(this.value)"> Área polar
-        <br>
-        <input type="radio" name="graficType" value="doughnut" onclick="func(this.value)"> Dona
-        <br>
-        <input type="radio" name="graficType" value="pie" onclick="func(this.value)"> Torta
-        <br>
-      </div>
     </div>
   </div>
 
