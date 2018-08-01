@@ -13,19 +13,20 @@
                 <table id="tabla" class="table table-bordered table-hover">
                         <tbody>
                                 <% for(var i = 0; i < encuestas.length; i++){ %>
-                                    <a href="/encuesta"> 
-                                <tr>
+                                    
+                                    <tr>
 
                                 <td>
-                                        
-                                      <%= encuestas[i].tittle %>
+                                         
+                                        <%= encuestas[i].tittle %>
+                                    
                                     </td>
                                     <td>
-                                      <%= encuestas[i]._id %>
+                                      <a href="/encuestas/<%= encuestas[i]._id %>">IR</a>
                                    </td> 
                                  
                                   </tr> 
-                                </a>
+                               
                                 <% } %>
                             </tbody>
                 </table>

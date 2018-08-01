@@ -1,12 +1,9 @@
 const Task = require('./models/task');
-<<<<<<< HEAD
 const Cfuel = require('./controladores/Cfuel')
 const Cpreg = require('./controladores/Cpregunta')
 const Cenc = require('./controladores/Cencuesta')
 const Cencpreg = require('./controladores/Cencpreg')
 const enc = require('./models/encuesta')
-=======
->>>>>>> 528903765dd1b73272e126738d789e572a7077d7
 
 module.exports = (app, passport) => {
 
@@ -78,7 +75,6 @@ app.get('/eliminar/:id', async (req, res) => {
 		tasks
 	});
 });
-<<<<<<< HEAD
 
 
 	app.get('/ejemplo',(req,res) =>{
@@ -106,6 +102,17 @@ app.get('/eliminar/:id', async (req, res) => {
 		});
 	})
 	app.get('/getencuestas',Cenc.getencuestas)
+	app.get('/encuestas/:id',async (req, res) => {
+		const {id} = req.params
+		const task = await enc.find({_id: id});
+		res.render('encuesta', {
+				task
+		});
+	})
+	app.get("/encuesta",(req,res) =>{
+		res.render('encuesta', {
+		});
+	})
 	app.get("/preg",Cpreg.insertpregunta)
 	app.get("/newe",Cenc.insertarencuesta)
 	app.get("/ep",Cencpreg.insertarencpreg)
@@ -135,8 +142,6 @@ app.get('/eliminar/:id', async (req, res) => {
        return res.status(200).send(task)
     })
 	})
-=======
->>>>>>> 528903765dd1b73272e126738d789e572a7077d7
 };
 
 function isLoggedIn (req, res, next) {
@@ -146,5 +151,3 @@ function isLoggedIn (req, res, next) {
 
 	res.redirect('/');
 };
-
-
