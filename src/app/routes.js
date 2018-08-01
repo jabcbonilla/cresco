@@ -1,5 +1,4 @@
 const Task = require('./models/task');
-const Cfuel = require('./controladores/Cfuel')
 
 module.exports = (app, passport) => {
 
@@ -34,6 +33,8 @@ module.exports = (app, passport) => {
 		failureFlash: true // allow flash messages
 	}));
 
+	
+
 	//profile view
 	/*app.get('/profile', isLoggedIn, (req, res) => {
 		res.render('profile', {
@@ -48,12 +49,19 @@ app.post('/agregar', async (req, res) => {
 	res.redirect('/profile');
 
 });
+
+app.get('/eliminar/:id', async (req, res) => {
+	const { id } = req.params;
+	await Task.remove({_id: id});	
+	res.redirect('/profile');
+
+});
 	// logout
 	app.get('/logout', (req, res) => {
 		req.logout();
 		res.redirect('/');
 	});
-
+// profile
 	app.get('/profile', async (req, res) => {
 	const tasks = await Task.find();
 	console.log(tasks);
@@ -62,26 +70,6 @@ app.post('/agregar', async (req, res) => {
 		tasks
 	});
 });
-
-
-	app.get('/ejemplo',(req,res) =>{
-    res.render('ejemplo1')
-  })
-  	app.get('/otro', (req,res)=>{
-    res.render('ejemplo2')
-  })
-  
-  	app.get('/grafica', (req,res)=>{
-    res.render('chart')
-  })
-
-  	app.get('/graficadb', (req,res)=>{
-    res.render('chartdb')
-  })
-
-  //fuel methods
-	app.get("/fuel",Cfuel.getfuel)
-
 };
 
 function isLoggedIn (req, res, next) {
