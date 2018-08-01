@@ -3,7 +3,9 @@
   <head>
     <meta charset="utf-8">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    <script type="text/javascript" src="./campos.js"></script>
     <title>Profile Page</title>
     <% include partials/head %>
   </head>
@@ -38,7 +40,6 @@
 <!-- ENCUESTAS -->
 
 
-<!-- FIN ENCUESTAS -->
 
 
 <div class="container">
@@ -47,7 +48,7 @@
     <div class="col-md-5">
       <div class="card">
         <div class="card-body">
-          <form action="/agregar" method="POST">
+          <form >
             <div class="form-group">
               <input type="text" name="valor" placeholder="Escriba la pregunta" class="form-control">
 
@@ -58,26 +59,42 @@
                 <input type="radio" name="surveyType" value="dicotomica"> Dicotómica (Sí o no)<br>
               </form>
 
+<!-- FIN ENCUESTAS -->
+       
+  <div id="main">
+<input type="button" id="btAdd" value="Añadir Elemento" class="bt" />
+<input type="button" id="btRemove" value="Eliminar Elemento" class="bt" />
+<input type="button" id="btRemoveAll" value="Eliminar Todo" class="bt" /><br />
+</div>
+          
+          <div class="container">
+            <div class="row">
               
-               
-                <div class="row">
-                  <h5 class="col-md-7">¿Cuántas opciones tiene la pregunta?</h5>
-                  <div class="col-md-5">
-                            <input  type="number" value="1" name="quantity" min="1" max="6">
-                  </div>
-                </div>
-             
-
+                <h4 class="col-md-12">Opciones</h4>
+                  <input type="text" name="valor" placeholder="Escriba la opción" class="form-control col-md-7">
+                  <input type="number" name="quantity" min="1" max="5" value="1" class="form-control col-md-3">
+                
+              
+            </div>
+          </div>
+           <button class="btn btn-success col-md-2">+</button>
+          <div class="container">
+            <form>
+              <div class="col-md-12">
+                
+              </div>
+            </form>
+          </div>
 
             </div>
             
-            <button class="btn btn-primary btn-block" type="submit">Añadir</button>
+            
           </form>
+          <button action="/agregar" method="POST" class="btn btn-primary btn-block" type="submit">Añadir</button>
         </div>
       </div>
     </div>
 
-  
 
 
 <!--Lista-->
@@ -85,8 +102,9 @@
     <table class="table table-bordered table-hover">
       <thead>
         <tr>
-          <th>Valor</th>    
-          <th>Opciones</th>   
+          <th>Pregunta</th>    
+          <th>Tipo</th>   
+          <th>Opciones</th>
           
         </tr>
       </thead>
@@ -94,11 +112,12 @@
         <% for(var i = 0; i < tasks.length; i++){ %>
           <tr>
             
-            <td><%= tasks[i].valor %></td>
+            <td><%= tasks[i].pregunta %></td>
+            <td><%= tasks[i].tipo %></td>
             <td>
-              <a href="/listo/<%= tasks[i]._id %>" class="btn <%= tasks[i].estatus ? 'btn-success' : 'btn-dark' %>">Listo</a>
+              <a href="/listo/<%= tasks[i]._id %>" class="btn <%= tasks[i].estatus ? 'btn-success' : 'btn-dark' %>">Ver gráfico</a>
               <a href="/eliminar/<%= tasks[i]._id %>" class="btn btn-danger">Eliminar</a>
-              <a href="/editar/<%= tasks[i]._id %>" class="btn btn-info">Editar</a>
+              
             </td>
           </tr>
         <% } %>
@@ -120,13 +139,13 @@ var chart = new Chart(ctx, {
 
     // The data for our dataset
     data: {
-        labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"],
+        labels: ['<%= tasks[0].opc1 %>', '<%= tasks[0].opc %>'],
         datasets: [{
             label: ['Personas que respondieron positivamente'],
           
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
-            data: [<%=tasks[0].valor %>, 10, 5, 2, 20, 30, 45],
+            data: [<%=tasks[0].cant1 %>, 10, 5, 2, 20, 30, 45],
             
         },
         {
@@ -134,7 +153,7 @@ var chart = new Chart(ctx, {
           
             backgroundColor: 'rgb(255, 19, 12)',
             borderColor: 'rgb(255, 99, 132)',
-            data: [<%= tasks[1].valor  %>, 10, 5, 2, 20, 30, 45],
+            data: [<%= tasks[1].cant4  %>, 10, 5, 2, 20, 30, 45],
         }
         ]
     },
