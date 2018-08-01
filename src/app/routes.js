@@ -1,5 +1,9 @@
 const Task = require('./models/task');
 const Cfuel = require('./controladores/Cfuel')
+const Cpreg = require('./controladores/Cpregunta')
+const Cenc = require('./controladores/Cencuesta')
+const Cencpreg = require('./controladores/Cencpreg')
+const enc = require('./models/encuesta')
 
 module.exports = (app, passport) => {
 
@@ -81,7 +85,43 @@ app.post('/agregar', async (req, res) => {
 
   //fuel methods
 	app.get("/fuel",Cfuel.getfuel)
-
+	app.get('/encuestas',async (req, res) => {
+		const encuestas = await enc.find();
+		console.log(encuestas);
+		res.render('encuestas', {
+				encuestas
+		});
+	})
+	app.get('/getencuestas',Cenc.getencuestas)
+	app.get("/preg",Cpreg.insertpregunta)
+	app.get("/newe",Cenc.insertarencuesta)
+	app.get("/ep",Cencpreg.insertarencpreg)
+  app.get("/ct", (req,res)=>{
+	
+	const task = new Task({
+		pregunta: "Proceso de Check-in | Check-in process",
+	tipo: 1,
+	opc1: "aceptable",
+	opc: "aceptable",
+	opc2: "aceptable",
+	opc3: "malo",
+	opc4: "malo",
+	opc5: "malo",
+	opc6: "deficiente",
+	cant1: 10,
+	cant2: 20,
+	cant3: 30,
+	cant4: 20,
+	cant5: 20,
+	cant6: 10
+    })
+    
+    task.save((err) =>{
+        if (err) return res.status(500).send({message: 'error al crear fuel:'+err})
+    
+       return res.status(200).send(task)
+    })
+	})
 };
 
 function isLoggedIn (req, res, next) {

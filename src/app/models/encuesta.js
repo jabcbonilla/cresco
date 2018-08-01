@@ -1,17 +1,17 @@
-import { Schema } from 'mongoose';
 
 'use strict'
-var preg = mongoose.model('pregunta')
-
 const mongoose = require('mongoose')
+//var preg = mongoose.model('pregunta')
+//const c = mongoose.model('company')
+
 
 var encuestaSchema = mongoose.Schema({
-    pregunta: {type: Schema.ObjectId,ref: "preg"},
+  //  company: {type: Schema.ObjectId,ref: "c"},
+  company: String,  
+  tittle: String,
     fecha: {type: Date,
         default: Date.now}
 
 })
-
-
 
 module.exports = mongoose.model('encuesta',encuestaSchema)

@@ -1,8 +1,8 @@
-menc = require('../modelos/encuesta')
-
+'use strict'
+const Mencuesta = require('../models/encuesta')
 
 function getencuestas(req,res){
-    menc.find((err,fue)=>{
+    Mencuesta.find((err,fue)=>{
         if (err) return res.status(500).send({message: err})
 
         if (!fue) return res.status(404).send({message: 'fuel no encontrado'})
@@ -15,7 +15,7 @@ function getencuestas(req,res){
 function getencuesta(req,res,id){
     var enc = id
     
-    menc.findById(enc,(err,produc)=>{
+    Mencuesta.findById(enc,(err,produc)=>{
         if (err) return res.status(500).send({message: 'error al buscar: ${err}'})
         if (!produc) return res.status(404).send({message: 'el producto no existe'})
     
@@ -24,11 +24,23 @@ function getencuesta(req,res,id){
 
     }
 
+    function insertarencuesta(req,res){
+        const encuesta = new Mencuesta({
+            company: '5b61a1160d8738a59ce4f90a',
+            tittle: 'primera'
+        })
+        
+        encuesta.save((err) =>{
+            if (err) return res.status(500).send({message: 'error al crear encuesta:'+err})
+        
+            return res.status(200).send(encuesta)
+        })
+    }
 
 
 
 module.exports = {
     getencuestas,
-    getencuenta,
-    ingresarencuesta
+    getencuesta,
+    insertarencuesta
 }

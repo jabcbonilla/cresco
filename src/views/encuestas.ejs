@@ -3,7 +3,6 @@
 <head>
 	<title>encuestas</title>
     <% include partials/head %>
-    <script src="campos.js"></script>
 </head>
 <body>
 
@@ -11,120 +10,26 @@
 		<div class="card text-center mt-5">
 			<div class="card-body">
                 <h1>Encuestas</h1>
+                <table id="tabla" class="table table-bordered table-hover">
+                        <tbody>
+                                <% for(var i = 0; i < encuestas.length; i++){ %>
+                                    <a href="/encuesta"> 
+                                <tr>
 
+                                <td>
+                                        
+                                      <%= encuestas[i].tittle %>
+                                    </td>
+                                    <td>
+                                      <%= encuestas[i]._id %>
+                                   </td> 
+                                 
+                                  </tr> 
+                                </a>
+                                <% } %>
+                            </tbody>
+                </table>
                  
             </div>
 			</div>
-		</div>
-
-		<!--Lista-->
-		<div class="col-md-7">
-
-				<table class="table table-bordered table-hover">
-				  <thead>
-					<tr>
-					  <th>Pregunta</th>
-					  <th>Tipo</th>
-					  <th>Opciones</th>
-		
-					</tr>
-				  </thead>
-				  <tbody>
-					<% for(var i = 0; i < tasks.length; i++){ %>
-					  <tr>
-		
-						<td>
-						  <%= tasks[i].pregunta %>
-						</td>
-						<td>
-						  <%= tasks[i].tipo %>
-						</td>
-						<td>
-						  <div class="container">
-		
-							<input type="radio" name="graficType" value="bar" onclick="func(this.value)"> Barra
-							<br>
-							<input type="radio" name="graficType" value="polarArea" onclick="func(this.value)"> Área polar
-							<br>
-							<input type="radio" name="graficType" value="doughnut" onclick="func(this.value)"> Dona
-							<br>
-							<input type="radio" name="graficType" value="pie" onclick="func(this.value)"> Torta
-							<br>
-						  </div>
-						  <a href="/eliminar/<%= tasks[i]._id %>" class="btn btn-danger">Eliminar</a>
-		
-						</td>
-					  </tr>
-					  <% } %>
-				  </tbody>
-		
-				</table>
-			  </div>
-		
-			  <div class="container">
-		
-				<input type="radio" name="graficType" value="bar" onclick="func(this.value)"> Barra
-				<br>
-				<input type="radio" name="graficType" value="polarArea" onclick="func(this.value)"> Área polar
-				<br>
-				<input type="radio" name="graficType" value="doughnut" onclick="func(this.value)"> Dona
-				<br>
-				<input type="radio" name="graficType" value="pie" onclick="func(this.value)"> Torta
-				<br>
-			  </div>
-			</div>
-		  </div>
-		
-		
-		  <div class="chart-container" style="position: relative; left: 25%; height:20vh; width:50vw">
-			<canvas id="myChart"></canvas>
-			<script>
-			  var ctx = document.getElementById('myChart').getContext('2d');
-			  var myChart;
-		
-			  function func(tipo) {
-		
-				cargargrafico(tipo);
-			  };
-		
-			  function cargargrafico(tipo) {
-				myChart = Chart;
-				var chart = new Chart(ctx, {
-				  // The type of chart we want to create
-				  type: tipo,
-		
-				  // The data for our dataset
-				  data: {
-					labels: ['<%= tasks[1].opc1 %>', '<%= tasks[1].opc2 %>', '<%= tasks[1].opc3 %>', '<%= tasks[1].opc4 %>'],
-					datasets: [{
-					  label: ['<%= tasks[1].pregunta %>'],
-		
-					  backgroundColor: ['rgb(0, 255, 39)', 'rgb(243, 255, 0)', 'rgb(255, 87, 51)', 'rgb(255, 0, 0)'],
-					  borderColor: 'rgb(255, 255, 255)',
-					  data: [<%=tasks[1].cant1 %>, <%=tasks[1].cant2 %>, <%=tasks[1].cant3 %>, <%=tasks[1].cant4 %>],
-		
-					},
-		
-					]
-				  },
-		
-				  // Configuration options go here
-		
-				  options: {
-					scales: {
-					  yAxes: [{
-						ticks: {
-						  beginAtZero: true
-						}
-					  }]
-					}
-				  }
-				});
-			  }
-			</script>
-			
-		  </div>
-	</div>
-
-</body>
-</html>
+        </div>
