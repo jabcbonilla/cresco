@@ -5,8 +5,7 @@ const Schema = mongoose.Schema;
 const TaskSchema = new Schema({
 	pregunta: String,
 	tipo: Number,
-	opc1: String,
-	opc: String,
+	opc1: String,	
 	opc2: String,
 	opc3: String,
 	opc4: String,

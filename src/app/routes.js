@@ -1,9 +1,12 @@
 const Task = require('./models/task');
+<<<<<<< HEAD
 const Cfuel = require('./controladores/Cfuel')
 const Cpreg = require('./controladores/Cpregunta')
 const Cenc = require('./controladores/Cencuesta')
 const Cencpreg = require('./controladores/Cencpreg')
 const enc = require('./models/encuesta')
+=======
+>>>>>>> 528903765dd1b73272e126738d789e572a7077d7
 
 module.exports = (app, passport) => {
 
@@ -38,6 +41,8 @@ module.exports = (app, passport) => {
 		failureFlash: true // allow flash messages
 	}));
 
+	
+
 	//profile view
 	/*app.get('/profile', isLoggedIn, (req, res) => {
 		res.render('profile', {
@@ -52,12 +57,19 @@ app.post('/agregar', async (req, res) => {
 	res.redirect('/profile');
 
 });
+
+app.get('/eliminar/:id', async (req, res) => {
+	const { id } = req.params;
+	await Task.remove({_id: id});	
+	res.redirect('/profile');
+
+});
 	// logout
 	app.get('/logout', (req, res) => {
 		req.logout();
 		res.redirect('/');
 	});
-
+// profile
 	app.get('/profile', async (req, res) => {
 	const tasks = await Task.find();
 	console.log(tasks);
@@ -66,6 +78,7 @@ app.post('/agregar', async (req, res) => {
 		tasks
 	});
 });
+<<<<<<< HEAD
 
 
 	app.get('/ejemplo',(req,res) =>{
@@ -122,6 +135,8 @@ app.post('/agregar', async (req, res) => {
        return res.status(200).send(task)
     })
 	})
+=======
+>>>>>>> 528903765dd1b73272e126738d789e572a7077d7
 };
 
 function isLoggedIn (req, res, next) {

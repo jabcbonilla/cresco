@@ -6,7 +6,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 
 
-  <script type="text/javascript" src="./campos.js"></script>
+  <!--<script type="text/javascript" src="./campos.js"></script>-->
   <title>Principal</title>
   <% include partials/head %>
 </head>
@@ -14,17 +14,17 @@
 <body>
 
 
-  <div class="container">
+  
 
     <nav class="navbar" id="barra">
-      <a class="navbar-brand " href="/profile">CRESCO</a>
+      <a class="navbar-brand marca" href="/profile">CRESCO</a>
       <form class="form-inline">
 
-        <a href="/profile">
+        <a href="/profile" class="emailBarra">
           <%= user.local.email %>
             <br>
         </a>
-        <a href="/logout" class="btn btn-light btn-sm ">
+        <a href="/logout" class="btn btn-light btn-sm btn-logout">
           Cerrar Sesión
         </a>
 
@@ -33,7 +33,7 @@
 
     </nav>
 
-  </div>
+
   <hr>
 
   <!-- ENCUESTAS -->
@@ -60,7 +60,7 @@
                   </div>
                 </div>
 
-                <!-- FIN ENCUESTAS -->
+  <!-- FIN ENCUESTAS -->
 
                 <!-- <div id="main">
 <input type="button" id="btAdd" value="Añadir Elemento" class="bt" />
@@ -73,7 +73,7 @@
 
                     <h3 class="col-md-12 mb-3">Opciones</h3>
                     <input type="text" name="valor" placeholder="Escriba la opción" class="form-control col-md-7">
-                    <input type="number" name="quantity" min="1" max="5" value="1" class="form-control col-md-3" style="left: 5px;">
+                    <input type="number" name="quantity" data-toggle="tooltip" data-placement="top" title="Especifique la cantidad de usuarios que elijieron esta opción" min="1" max="5" value="1" class="form-control col-md-3" style="left: 5px;">
                     <div id="main" class="col-md-2">
                       <button class="btn btn-success" id="btAdd" data-toggle="tooltip" data-placement="right" title="Añadir otra opción">+</button>
                     </div>
@@ -107,7 +107,12 @@
               <tr>
 
                 <td>
-                  <%= tasks[i].pregunta %>
+                  <%= tasks[i].pregunta %> <br>
+                 <strong>Opciones:</strong> <br>
+                  <%= tasks[i].opc1 %> <br>
+                  <%= tasks[i].opc2 %> <br>
+                  <%= tasks[i].opc3 %> <br>
+                  <%= tasks[i].opc4 %>
                 </td>
                 <td>
                   <%= tasks[i].tipo %>
@@ -158,13 +163,13 @@
 
           // The data for our dataset
           data: {
-            labels: ['<%= tasks[1].opc1 %>', '<%= tasks[1].opc2 %>', '<%= tasks[1].opc3 %>', '<%= tasks[1].opc4 %>'],
+            labels: ['<%= tasks[0].opc1 %>', '<%= tasks[0].opc2 %>', '<%= tasks[0].opc3 %>', '<%= tasks[0].opc4 %>'],
             datasets: [{
-              label: ['<%= tasks[1].pregunta %>'],
+              label: ['<%= tasks[0].pregunta %>'],
 
               backgroundColor: ['rgb(0, 255, 39)', 'rgb(243, 255, 0)', 'rgb(255, 87, 51)', 'rgb(255, 0, 0)'],
               borderColor: 'rgb(255, 255, 255)',
-              data: [<%=tasks[1].cant1 %>, <%=tasks[1].cant2 %>, <%=tasks[1].cant3 %>, <%=tasks[1].cant4 %>],
+              data: [<%=tasks[0].cant1 %>, <%=tasks[0].cant2 %>, <%=tasks[0].cant3 %>, <%=tasks[0].cant4 %>],
 
             },
 
