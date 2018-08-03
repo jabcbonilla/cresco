@@ -3,6 +3,9 @@
 
 <head>
   <meta charset="utf-8">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+  <script type="text/javascript" src="/js/sd-admin.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
 
   <!--<script type="text/javascript" src="./campos.js"></script>-->
@@ -10,10 +13,12 @@
   <% include partials/head %>
 </head>
 
-<body>
+<body id="page-top">
 
-  <nav class="navbar mb-4" id="barra">
+  <nav class="navbar" id="barra">
+    <div class="col-md-1" style="width: 100px; background-color: #008FFF; border-radius: 3px">
     <a class="navbar-brand marca" href="/profile">CRESCO</a>
+    </div>
     <form class="form-inline">
 
       <a href="/profile" class="emailBarra">
@@ -21,169 +26,57 @@
           <br>
       </a>
       <a href="/logout" class="btn btn-light btn-sm btn-logout">
-      <span class="fa fa-sign-out"></span>
+        <i class="fa fa-sign-out-alt"></i>
         Cerrar Sesión
       </a>
     </form>
   </nav>
 
-  <!-- ENCUESTAS -->
-
-  <div class="container">
-    <div class="row">
-      <!--Formulario-->
-      <div class="col-md-5">
-        <div class="card">
-          <div class="card-body">
-            <form action="/agregar" method="POST">
-              <div class="form-group">
-
-                <h2 class="col-md-12 text-center mb-4">Almacenar nueva encuesta</h2>
-                <input type="text" name="sucursal" placeholder="Escriba la sucursal" class="form-control mb-4">
-                <input type="text" name="pregunta" placeholder="Escriba la pregunta" class="form-control mb-4">
-
-                <h3 class="col-md-12 mb-3">Tipo de pregunta</h3>
-                <div class="container text-center">
-                  <div class="btn-group mb-4" role="group" aria-label="Basic example">
-                    <input type="button" id="btn-Tipo1" class="btn btn-primary" name="tipo"  value="Selección Simple" >
-                   <input type="button" id="btn-Tipo2" class="btn btn-info" name="tipo" value="Selección Múltiple" >
-
-                  </div>
-                </div>
-
-                <!-- FIN ENCUESTAS -->
-
-                <!-- <div id="main">
-<input type="button" id="btAdd" value="Añadir Elemento" class="bt" />
-<input type="button" id="btRemove" value="Eliminar Elemento" class="bt" />
-<input type="button" id="btRemoveAll" value="Eliminar Todo" class="bt" /><br />
-</div>-->
-
-                <div class="container">
-                  <div class="row mb-3">
-
-                    <h3 class="col-md-12 mb-3">Opciones</h3>
-                    <input type="text" name="opc1" placeholder="Escriba la opción" class="form-control col-md-7">
-                    <input type="number" name="cant1" data-toggle="tooltip" data-placement="top" title="Especifique la cantidad de usuarios que elijieron esta opción"
-                      min="1" max="5" value="1" class="form-control col-md-3" style="left: 5px;">
-                    <div id="main" class="col-md-2">
-                      <button class="btn btn-success " type="button" id="btAdd" data-toggle="tooltip" data-placement="right" title="Añadir otra opción">+</button>
-                    </div>
-
-                  </div>
-                </div>
-                <div class="row">
-                <button class="btn btn-success  col-md-6" type="button">Añadir pregunta</button>
-                <button class="btn btn-warning btn-block col-md-6" type="submit">Guardar encuesta -></button>
-              </div>
-              </div>
-            </form>
-
-          </div>
-        </div>
+   <!--INICIO Dashboard-->
+<div id="wrapper">
+   <ul class="sidebar navbar-nav">
+    <li class="nav-item active">
+      <a class="nav-link" href="/profile">
+        <i class="fa fa-fw fa-tachometer-alt"></i>
+        <span>Dashboard</span>
+      </a>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-fw fa-folder"></i>
+        <span>Configuración</span>
+      </a>
+      <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+        
+        <a class="dropdown-item" href="#"><i class="fa fa-user-circle"></i> Cuenta</a>
+        <a class="dropdown-item" href="#"><i class="fa fa-key"></i> Cambiar contraseña</a>
+        
+        <div class="dropdown-divider"></div>
+        
+        <a class="dropdown-item" href="/logout"><span class="fa fa-sign-out-alt"></span> Cerrar sesión</a>
+        
       </div>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">
+        <i class="fa fa-fw fa-users-cog"></i>
+        <span>Gestión de usuarios</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/encuestas">
+        <i class="fa fa-fw fa-table"></i>
+        <span>Encuestas</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/reportes">
+        <i class="fa fa-fw fa-chart-area"></i>
+        <span>Reportes</span></a>
+    </li>
+  </ul>
 
-      <!--Lista-->
-      <div class="col-md-7">
-        <h2 class="text-center">Mis encuestas</h2>
-        <table class="table table-bordered table-hover">
-          <thead>
-            <tr>
-              <th>Pregunta</th>
-              <th>Tipo</th>
-              <th>Opciones</th>
-            </tr>
-          </thead>
+  <!--FIN Dashboard-->
 
-          <tbody>
-            <% for(var i = 0; i < tasks.length; i++){ %>
-              <tr>
-                <td>
-                  <%= tasks[i].pregunta %>
-                    <br>
-                    <strong>Opciones:</strong>
-                    <br>
-                    <%= tasks[i].opc1 %>
-                      <br>
-                      <%= tasks[i].opc2 %>
-                        <br>
-                        <%= tasks[i].opc3 %>
-                          <br>
-                          <%= tasks[i].opc4 %>
-                </td>
-                <td>
-                  <%= tasks[i].tipo %>
-                </td>
-                <td>
-            
-                  <div class="container">
-                    <input type="radio" name="graficType" value="bar" onclick="cargargrafico(this.value,<%=i%>)"> Barra
-                    <br>
-                    <input type="radio" name="graficType" value="polarArea" onclick="cargargrafico(this.value,<%=i%>)"> Área polar
-                    <br>
-                    <input type="radio" name="graficType" value="doughnut" onclick="cargargrafico(this.value,<%=i%>)"> Dona
-                    <br>
-                    <input type="radio" name="graficType" value="pie" onclick="cargargrafico(this.value,<%=i%>)"> Torta
-                    <br>
-                  </div>
-                  <a href="/eliminar/<%= tasks[i]._id %>" class="btn btn-danger">Eliminar</a>
-                </td>
-              </tr>
-              <% } %>
-          </tbody>
-
-        </table>
-      </div>
-
-
-    </div>
-  </div>
-
-
-  <div class="chart-container" style="position: relative; left: 25%; height:20vh; width:50vw">
-    <canvas id="myChart"></canvas>
-    <script>
-      
-      var ctx = document.getElementById('myChart').getContext('2d');
-      var myChart;
-      
-      function cargargrafico(tipo,index) {
-        alert(index);
-        myChart = Chart;
-        var chart = new Chart(ctx, {
-          // Tipo de chart
-          type: tipo,
-          // Datos del chart
-          data: {
-            labels: ['<%= tasks[0].opc1 %>', '<%= tasks[0].opc2 %>', '<%= tasks[0].opc3 %>', '<%= tasks[0].opc4 %>'],
-            datasets: [{
-              label: ['<%= tasks[0].pregunta %>'],
-              backgroundColor: ['rgb(0, 255, 39)', 'rgb(243, 255, 0)', 'rgb(255, 87, 51)', 'rgb(255, 0, 0)'],
-              borderColor: 'rgb(255, 255, 255)',
-              data: [<%=tasks[0].cant1%>, <%=tasks[0].cant2 %>, <%=tasks[0].cant3 %>, <%=tasks[0].cant4 %>],
-            },
-            ]
-          },
-          // Opciones de configuración
-          options: {
-            scales: {
-              yAxes: [{
-                ticks: {
-                  beginAtZero: true
-                }
-              }]
-            }
-          }
-        });
-      };
-      function cambiarboton1(){
-    var i=document.getElementById("btn-Tipo1").value = "1";
-};
-function cambiarboton2(){
-    var i=document.getElementById("btn-Tipo2").value = "2";
-}
-      
-    </script>
+ 
   </div>
 </body>
 
