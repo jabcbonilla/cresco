@@ -6,12 +6,9 @@ const mongoose = require('mongoose')
 
 
 var encuestaSchema = mongoose.Schema({
-  //  company: {type: Schema.ObjectId,ref: "c"},
-  company: String,  
-  tittle: String,
-    fecha: {type: Date,
-        default: Date.now}
-
+  //  company: {type: Schema.ObjectId,ref: "c"},  
+  cod: String,
+  title: String,
 })
 
 module.exports = mongoose.model('encuesta',encuestaSchema)

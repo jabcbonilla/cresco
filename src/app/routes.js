@@ -102,6 +102,18 @@ app.get('/eliminar/:id', async (req, res) => {
 		});
 	})
 
+	app.get('/nosotros',async (req, res) => {
+		res.render('nosotros');
+	})
+
+	app.get('/proyectos',async (req, res) => {
+		res.render('proyectos');
+	})
+
+	app.get('/servicios',async (req, res) => {
+		res.render('servicios');
+	})
+
 	app.get('/getencuestas',Cenc.getencuestas)
 	//app.get('/encuestas/:id',async (req, res) => {
 	//	const {id} = req.params
@@ -113,8 +125,8 @@ app.get('/eliminar/:id', async (req, res) => {
 	//})
 	app.get("/encuestas/:id",(req,res)=>{
 		const {id} = req.params
-		Cenc.getencuesta("5b61a9b09200394f7701653c")
-		console.log(Cenc.getencuesta("5b61a9b09200394f7701653c"))
+		Cenc.getencuesta(req,res,id)
+		console.log(id)
 	})
 
 	app.get("/encuesta",Cenc.getencuesta)
