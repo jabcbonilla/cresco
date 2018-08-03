@@ -7,8 +7,50 @@
         </head>
 
 
-<body id="page1">
-	
+<body>
+    
+    <div class="content">
+		<div class="row">
+		<div class="offset-1 col-5">
+			<div class="card">
+				<div class="card-header">
+					<h6 class="text-center">Usuarios Registrados</h6>
+				</div>
+				<div class="card-body text-center">
+					<table id="usuarios">
+							<thead>
+									<tr>
+									  <th>Compañia</th>
+									  <th>Correo</th>
+									</tr>
+								  </thead>
+								  <tbody >
+									
+								  </tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-5 ">
+				<div class="card">
+					<div class="card-header">
+						<h6 class="text-center">Datos del Usuario</h6>
+					</div>
+					<div class="card-body">
+						<div id="datos" class="text-center">
+							<img src="../public/images/perfil.jpg" >
+							<p>Nombre:</p> <p>Maximo Peña</p>
+
+							<input type="button" class="btn-primary" value="Modificar">
+							<input type="button" class="btn-primary" value="Eliminar">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<br>
+    
 <!-- footer -->
 <footer>
 		<a rel="nofollow" href="http://www.templatemonster.com/" target="_blank">facebook</a>
@@ -18,6 +60,27 @@
 </footer>
 <!-- footer end-->
 
-<script type="text/javascript"> //Cufon.now(); </script>
+<script type="text/javascript"> 
+	var usu;
+
+    
+    fetch("http://localhost:3000/getusuarios")
+    .then(res => res.json())
+    .then((out) => {
+	usu=out['usuario'];
+	
+		for(var i=0;i< usu.length;i++)
+		{
+			var usuario = usu[i]
+			console.log(usuario)
+			$('#usuarios > tbody:last-child').append('<tr><td>'+usuario.local.company+'</td><td>'+usuario.local.email+'</td></tr>');
+		}
+        })
+    .catch(err => { throw err });
+
+
+  
+
+</script>
 </body>
 </html>

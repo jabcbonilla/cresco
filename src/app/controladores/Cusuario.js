@@ -1,7 +1,7 @@
 'use strict'
 
 const mongoose = require('mongoose')
-const Musuario = require('../modelos/usuario')
+const Musuario = require('../models/user')
 
 function getUsuarios(req,res){
     Musuario.find((err,usuario)=>{

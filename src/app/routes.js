@@ -2,6 +2,8 @@ const Task = require('./models/task');
 const Cfuel = require('./controladores/Cfuel')
 const Cpreg = require('./controladores/Cpregunta')
 const Cenc = require('./controladores/Cencuesta')
+const Cusu = require('./controladores/Cusuario')
+
 const Cencpreg = require('./controladores/Cencpreg')
 const enc = require('./models/encuesta')
 
@@ -77,44 +79,55 @@ app.get('/eliminar/:id', async (req, res) => {
 });
 
 
-	app.get('/ejemplo',(req,res) =>{
-    res.render('ejemplo1')
-  })
-  	app.get('/otro', (req,res)=>{
-    res.render('ejemplo2')
-  })
-  
-  	app.get('/grafica', (req,res)=>{
-    res.render('chart')
-  })
-
-  	app.get('/graficadb', (req,res)=>{
-    res.render('chartdb')
-  })
-
-  //fuel methods
-	app.get("/fuel",Cfuel.getfuel)
-
-	app.get('/encuestas',async (req, res) => {
-		const encuestas = await enc.find();
-		res.render('encuestas', {
-				encuestas
-		});
-	})
-
-	app.get('/nosotros',async (req, res) => {
+	app.get('/nosotros', (req, res) => {
 		res.render('nosotros');
 	})
 
-	app.get('/proyectos',async (req, res) => {
+	app.get('/proyectos',(req, res) => {
 		res.render('proyectos');
 	})
 
-	app.get('/servicios',async (req, res) => {
+	app.get('/servicios', (req, res) => {
 		res.render('servicios');
 	})
 
+	app.get('/contacto', (req, res) => {
+		res.render('contacto');
+	})
+
+	app.get('/usu', (req, res) => {
+		res.render('gusuario');
+	})
+
+
+	app.get('/ejemplo',(req,res) =>{
+		res.render('ejemplo1')
+	  })
+		  app.get('/otro', (req,res)=>{
+		res.render('ejemplo2')
+	  })
+	  
+		  app.get('/grafica', (req,res)=>{
+		res.render('chart')
+	  })
+	
+		  app.get('/graficadb', (req,res)=>{
+		res.render('chartdb')
+	  })
+	
+	  //fuel methods
+		app.get("/fuel",Cfuel.getfuel)
+	
+		app.get('/encuestas',async (req, res) => {
+			const encuestas = await enc.find();
+			res.render('encuestas', {
+					encuestas
+			});
+		})
+	
+
 	app.get('/getencuestas',Cenc.getencuestas)
+	app.get('/getusuarios',Cusu.getUsuarios)
 	//app.get('/encuestas/:id',async (req, res) => {
 	//	const {id} = req.params
 	//	const tas = await enc.find({_id: id});
