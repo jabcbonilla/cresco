@@ -1,0 +1,15 @@
+dashboard
+- gestion de usuarios
+    * cargar estructura
+-gestion de usuarios
+
+
+
+-gestionar reportes
+
+
+
+
+
+
+listado de encuentas 4.1

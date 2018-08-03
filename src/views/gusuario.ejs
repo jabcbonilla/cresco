@@ -7,80 +7,123 @@
         </head>
 
 
-<body>
-    
-    <div class="content">
-		<div class="row">
-		<div class="offset-1 col-5">
-			<div class="card">
-				<div class="card-header">
-					<h6 class="text-center">Usuarios Registrados</h6>
-				</div>
-				<div class="card-body text-center">
-					<table id="usuarios">
-							<thead>
-									<tr>
-									  <th>Compañia</th>
-									  <th>Correo</th>
-									</tr>
-								  </thead>
-								  <tbody >
-									
-								  </tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-		<div class="col-5 ">
-				<div class="card">
-					<div class="card-header">
-						<h6 class="text-center">Datos del Usuario</h6>
-					</div>
-					<div class="card-body">
-						<div id="datos" class="text-center">
-							<img src="../public/images/perfil.jpg" >
-							<p>Nombre:</p> <p>Maximo Peña</p>
 
-							<input type="button" class="btn-primary" value="Modificar">
-							<input type="button" class="btn-primary" value="Eliminar">
+		<body id="page-top">
+
+			<nav class="navbar" id="barra">
+			  <div class="col-md-1" style="width: 100px; background-color: #008FFF; border-radius: 3px">
+			 	 <a class="navbar-brand marca" href="/profile">CRESCO</a>
+			  </div>
+			  <form class="form-inline">
+		  
+				<a href="/profile" class="emailBarra">
+				  <%= user.local.email %>
+					<br>
+				</a>
+				<a href="/logout" class="btn btn-light btn-sm btn-logout">
+				  <i class="fa fa-sign-out-alt"></i>
+				  Cerrar Sesión
+				</a>
+			  </form>
+			</nav>
+		  
+			 <!--INICIO Dashboard-->
+		  <div id="wrapper">
+			 <ul class="sidebar navbar-nav">
+			  <li class="nav-item active">
+				<a class="nav-link" href="/profile">
+				  <i class="fa fa-fw fa-tachometer-alt"></i>
+				  <span>Dashboard</span>
+				</a>
+			  </li>
+			  <li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				  <i class="fa fa-fw fa-folder"></i>
+				  <span>Configuración</span>
+				</a>
+				<div class="dropdown-menu" aria-labelledby="pagesDropdown">
+				  
+				  <a class="dropdown-item" href="#"><i class="fa fa-user-circle"></i> Cuenta</a>
+				  <a class="dropdown-item" href="#"><i class="fa fa-key"></i> Cambiar contraseña</a>
+				  
+				  <div class="dropdown-divider"></div>
+				  
+				  <a class="dropdown-item" href="/logout"><span class="fa fa-sign-out-alt"></span> Cerrar sesión</a>
+				  
+				</div>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="/gusuario">
+				  <i class="fa fa-fw fa-users-cog"></i>
+				  <span>Gestión de usuarios</span></a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="/encuestas">
+				  <i class="fa fa-fw fa-table"></i>
+				  <span>Encuestas</span></a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="/reportes">
+				  <i class="fa fa-fw fa-chart-area"></i>
+				  <span>Reportes</span></a>
+			  </li>
+			</ul>
+		  
+			<!--FIN Dashboard-->
+		  
+		   
+		
+
+			<div id="content-wrapper" class="col-md-10"> 
+				<div class="row">
+					<div class="offset-1 col-5">
+						<div class="card">
+							<div class="card-header">
+								<h6 class="text-center">Usuarios Registrados</h6>
+							</div>
+							<div class="card-body text-center">
+								<table id="usuarios">
+										<thead>
+												<tr>
+													<th>Compañia</th>
+													<th>Correo</th>
+												</tr>
+												</thead>
+												<tbody >
+												
+												</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-<br>
-    
-<!-- footer -->
-<footer>
-		<a rel="nofollow" href="http://www.templatemonster.com/" target="_blank">facebook</a>
-		<br>
-		<a href="http://www.templates.com/product/3d-models/" target="_blank">Twitter</a> 
-	
-</footer>
-<!-- footer end-->
-
-<script type="text/javascript"> 
-	var usu;
-
-    
-    fetch("http://localhost:3000/getusuarios")
-    .then(res => res.json())
-    .then((out) => {
-	usu=out['usuario'];
-	
-		for(var i=0;i< usu.length;i++)
-		{
-			var usuario = usu[i]
-			console.log(usuario)
-			$('#usuarios > tbody:last-child').append('<tr><td>'+usuario.local.company+'</td><td>'+usuario.local.email+'</td></tr>');
-		}
-        })
-    .catch(err => { throw err });
-
-
-  
-
-</script>
-</body>
+					
+					
+			<script type="text/javascript"> 
+			function detalles(){
+				document.getElementById('detalles').append(<div class="card"><div class="card-header"><h6 class="text-center">'+"Datos del Usuario"+'</h6></div><div class="card-body"><div id="datos" class="text-center"><img src="../public/images/perfil.jpg" ><p>Nombre:</p> <p>Maximo Peña</p>									<input type="button" class="btn-primary" value="Modificar"><input type="button" class="btn-primary" value="Eliminar"></div></div></div></div></div></div><br>)
+			}
+				var usu;
+			
+					
+					fetch("http://localhost:3000/getusuarios")
+					.then(res => res.json())
+					.then((out) => {
+				usu=out['usuario'];
+				
+					for(var i=0;i< usu.length;i++)
+					{
+						var usuario = usu[i]
+						console.log(usuario)
+						$('#usuarios > tbody:last-child').append('<tr  onclick="detalles()"><td >'+usuario.local.company+'</td><td>'+usuario.local.email+'</td></tr>');
+					}
+							})
+					.catch(err => { throw err });
+			
+			
+				
+			
+			</script>
+			
+			
+		</body>
 </html>

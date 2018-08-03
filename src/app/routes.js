@@ -1,5 +1,11 @@
 const Task = require('./models/task');
+const Cfuel = require('./controladores/Cfuel')
+const Cpreg = require('./controladores/Cpregunta')
+const Cenc = require('./controladores/Cencuesta')
+const Cusu = require('./controladores/Cusuario')
 
+const Cencpreg = require('./controladores/Cencpreg')
+const enc = require('./models/encuesta')
 // http://localhost:8000/api/encuestas/obtener
 // cresco.js, 
 module.exports = (app, passport) => {
@@ -86,6 +92,15 @@ app.get('/encuestas', async (req, res) => {
 	});
 });
 
+app.get('/gusuario', async (req, res) => {
+	const tasks = await Task.find();
+	console.log(tasks);
+	res.render('gusuario', {
+		user: req.user,
+		tasks
+	});
+});
+
 // vista reportes
 app.get('/reportes', async (req, res) => {
 	const tasks = await Task.find();
@@ -95,6 +110,75 @@ app.get('/reportes', async (req, res) => {
 		tasks
 	});
 });
+
+app.get('/nosotros', (req, res) => {
+	res.render('nosotros');
+})
+
+app.get('/proyectos',(req, res) => {
+	res.render('proyectos');
+})
+
+app.get('/servicios', (req, res) => {
+	res.render('servicios');
+})
+
+app.get('/contacto', (req, res) => {
+	res.render('contacto');
+})
+
+app.get('/usu', (req, res) => {
+	res.render('gusuario');
+})
+
+
+app.get('/ejemplo',(req,res) =>{
+	res.render('ejemplo1')
+  })
+	  app.get('/otro', (req,res)=>{
+	res.render('ejemplo2')
+  })
+  
+
+	  app.get('/grafica', (req,res)=>{
+	res.render('chart')
+  })
+
+	  app.get('/graficadb', (req,res)=>{
+	res.render('chartdb')
+  })
+
+  //fuel methods
+	app.get("/fuel",Cfuel.getfuel)
+
+	app.get('/encuestas',async (req, res) => {
+		const encuestas = await enc.find();
+		res.render('encuestas', {
+				encuestas
+		});
+	})
+
+
+app.get('/getencuestas',Cenc.getencuestas)
+app.get('/getusuarios',Cusu.getUsuarios)
+//app.get('/encuestas/:id',async (req, res) => {
+//	const {id} = req.params
+//	const tas = await enc.find({_id: id});
+//	var task = tas[0]
+//	res.render('encuesta', {
+//		task
+//});
+//})
+app.get("/encuestas/:id",(req,res)=>{
+	const {id} = req.params
+	Cenc.getencuesta(req,res,id)
+	console.log(id)
+})
+
+app.get("/encuesta",Cenc.getencuesta)
+app.get("/preg",Cpreg.insertpregunta)
+app.get("/newe",Cenc.insertarencuesta)
+app.get("/ep",Cencpreg.insertarencpreg)
 };
 
 function isLoggedIn (req, res, next) {
