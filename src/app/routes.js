@@ -94,25 +94,30 @@ app.get('/eliminar/:id', async (req, res) => {
 
   //fuel methods
 	app.get("/fuel",Cfuel.getfuel)
+
 	app.get('/encuestas',async (req, res) => {
 		const encuestas = await enc.find();
-		console.log(encuestas);
 		res.render('encuestas', {
 				encuestas
 		});
 	})
+
 	app.get('/getencuestas',Cenc.getencuestas)
-	app.get('/encuestas/:id',async (req, res) => {
+	//app.get('/encuestas/:id',async (req, res) => {
+	//	const {id} = req.params
+	//	const tas = await enc.find({_id: id});
+	//	var task = tas[0]
+	//	res.render('encuesta', {
+	//		task
+	//});
+	//})
+	app.get("/encuestas/:id",(req,res)=>{
 		const {id} = req.params
-		const task = await enc.find({_id: id});
-		res.render('encuesta', {
-				task
-		});
+		Cenc.getencuesta("5b61a9b09200394f7701653c")
+		console.log(Cenc.getencuesta("5b61a9b09200394f7701653c"))
 	})
-	app.get("/encuesta",(req,res) =>{
-		res.render('encuesta', {
-		});
-	})
+
+	app.get("/encuesta",Cenc.getencuesta)
 	app.get("/preg",Cpreg.insertpregunta)
 	app.get("/newe",Cenc.insertarencuesta)
 	app.get("/ep",Cencpreg.insertarencpreg)

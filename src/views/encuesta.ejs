@@ -7,101 +7,57 @@
 </head>
 <body>
 
-	<div class="container">
+<div class="container">
                 <h1>Encuestas</h1>
 
 		<!--Lista-->
-			<div class="col-md-7">
+	<div class="col-md-7">
 
-				<table class="table table-bordered table-hover">
-				  <thead>
-					<tr>
-					  <th>Pregunta</th>
-					  <th>Tipo</th>
-					  <th>Opciones</th>
-		
-					</tr>
-				  </thead>
-				  <tbody>
-								<tr>
+		<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+				  <th>Pregunta</th>
+				  <th>Tipo</th>
+				  <th>Opciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<%= task.pregunta %> <br>
+						 <strong>Opciones:</strong> <br>
+						<%= task.opc1 %> <br>
+						<%= task.opc2 %> <br>
+						<%= task.opc4 %>
+					</td>
+					<td>
+						<%= task.tipo %>
+					</td>
+					<td>
+						
+						<div class="container">
+							<input type="radio" name="graficType" value="bar" onclick="cargargrafico(this.value)"> Barra
+							<br>
+							<input type="radio" name="graficType" value="polarArea" onclick="cargargrafico(this.value)"> Área polar
+							<br>
+							<input type="radio" name="graficType" value="doughnut" onclick="cargargrafico(this.value)"> Dona
+							<br>
+							<input type="radio" name="graficType" value="pie" onclick="cargargrafico(this.value)"> Torta
+							<br>
+						</div>
+						<a href="/eliminar/<%= task._id %>" class="btn btn-danger">Eliminar</a>
 	
-									<td>
-										<%= tasks.pregunta %> <br>
-									 <strong>Opciones:</strong> <br>
-										<%= tasks.opc1 %> <br>
-										<%= tasks.opc2 %> <br>
-										<%= tasks.opc4 %>
-									</td>
-									<td>
-										<%= tasks.tipo %>
-									</td>
-									<td>
-							
-										<div class="container">
-	
-											<input type="radio" name="graficType" value="bar" onclick="cargargrafico(this.value)"> Barra
-											<br>
-											<input type="radio" name="graficType" value="polarArea" onclick="cargargrafico(this.value)"> Área polar
-											<br>
-											<input type="radio" name="graficType" value="doughnut" onclick="cargargrafico(this.value)"> Dona
-											<br>
-											<input type="radio" name="graficType" value="pie" onclick="cargargrafico(this.value)"> Torta
-											<br>
-										</div>
-										<a href="/eliminar/<%= tasks._id %>" class="btn btn-danger">Eliminar</a>
-	
-									</td>
-								</tr>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 			
-						</tbody>
-				</table>
-			  </div>
 
 		  <div class="chart-container" style="position: relative; left: 25%; height:20vh; width:50vw">
 			<canvas id="myChart"></canvas>
-			<script>
-					var ctx = document.getElementById('myChart').getContext('2d');
-					var myChart;
-			
-			
-					function cargargrafico(tipo) {
-					myChart = Chart;
-					var chart = new Chart(ctx, {
-						// The type of chart we want to create
-						type: tipo,
-			
-						// The data for our dataset
-						data: {
-						labels: ['<%= task[0]opc1 %>', '<%= task[0].opc2 %>', '<%= task[0].opc3 %>', '<%= tasks[0].opc4 %>'],
-						datasets: [{
-							label: ['<%= task[0].pregunta %>'],
-			
-							backgroundColor: ['rgb(0, 255, 39)', 'rgb(243, 255, 0)', 'rgb(255, 87, 51)', 'rgb(255, 0, 0)'],
-							borderColor: 'rgb(255, 255, 255)',
-							data: [<%=task[0].cant1 %>, <%=task[0].cant2 %>, <%=task[0].cant3 %>, <%=task[0].cant4 %>],
-			
-						},
-			
-						]
-						},
-			
-						// Configuration options go here
-			
-						options: {
-						scales: {
-							yAxes: [{
-							ticks: {
-								beginAtZero: true
-							}
-							}]
-						}
-						}
-					});
-					}
-				</script>
-		  </div>
 		</div>
 	</div>
+</div>
 
 </body>
 </html>

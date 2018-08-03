@@ -49,7 +49,7 @@ app.use(flash());
 require('./app/routes.js')(app, passport);
 
 // static files
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join()));
 
 // start the server
 

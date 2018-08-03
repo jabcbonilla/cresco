@@ -3,7 +3,6 @@
 
 <head>
   <meta charset="utf-8">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 
 
   <!--<script type="text/javascript" src="./campos.js"></script>-->
@@ -99,7 +98,6 @@
           <tbody>
             <% for(var i = 0; i < tasks.length; i++){ %>
               <tr>
-
                 <td>
                   <%= tasks[i].pregunta %>
                     <br>
@@ -119,7 +117,6 @@
                 <td>
             
                   <div class="container">
-
                     <input type="radio" name="graficType" value="bar" onclick="cargargrafico(this.value,<%=i%>)"> Barra
                     <br>
                     <input type="radio" name="graficType" value="polarArea" onclick="cargargrafico(this.value,<%=i%>)"> Área polar
@@ -156,13 +153,7 @@
         var chart = new Chart(ctx, {
           // Tipo de chart
           type: tipo,
-
-<<<<<<< HEAD
-          // The data for our dataset
-          
-=======
           // Datos del chart
->>>>>>> 5ad9230cc9279123bd00f6ace51a90af8e07094f
           data: {
             labels: ['<%= tasks[0].opc1 %>', '<%= tasks[0].opc2 %>', '<%= tasks[0].opc3 %>', '<%= tasks[0].opc4 %>'],
             datasets: [{
@@ -170,14 +161,10 @@
               backgroundColor: ['rgb(0, 255, 39)', 'rgb(243, 255, 0)', 'rgb(255, 87, 51)', 'rgb(255, 0, 0)'],
               borderColor: 'rgb(255, 255, 255)',
               data: [<%=tasks[0].cant1%>, <%=tasks[0].cant2 %>, <%=tasks[0].cant3 %>, <%=tasks[0].cant4 %>],
-
             },
-
             ]
           },
-
           // Opciones de configuración
-
           options: {
             scales: {
               yAxes: [{
@@ -189,17 +176,12 @@
           }
         });
       };
-
       function cambiarboton1(){
     var i=document.getElementById("btn-Tipo1").value = "1";
-
 };
-
 function cambiarboton2(){
     var i=document.getElementById("btn-Tipo2").value = "2";
-
 }
-
       
     </script>
   </div>
